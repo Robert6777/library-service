@@ -52,6 +52,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.7.5</version>
+        </dependency>
 
     </dependencies>
 
@@ -64,6 +69,7 @@
 
             </plugin>
 
+            <!--            plugin from baeldung // attention inputs are changed of course-->
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
@@ -74,51 +80,61 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/</inputSpec>
-                            <output>${project.basedir}/src/main/resources/</output>
-                            <generatorName>java</generatorName>
-                            <configOptions>
-                                <interfaceOnly>true</interfaceOnly>-->
-                                <sourceFolder>src/gen/java</sourceFolder>
-                            </configOptions>
-                            <importMappings>-->
-                                <importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>
-                            </importMappings>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/library-api.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <apiPackage>com.robert.library-service.api</apiPackage>
+                            <modelPackage>com.robert.library-service.model</modelPackage>
                             <supportingFilesToGenerate>
                                 ApiUtil.java
                             </supportingFilesToGenerate>
+                            <configOptions>
+                                <delegatePattern>true</delegatePattern>
+                            </configOptions>
                         </configuration>
                     </execution>
                 </executions>
-
             </plugin>
 
+<!--            <plugin>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--                <version>6.0.0</version>-->
+<!--                <configuration>-->
+<!--                    <globalProperties>-->
+<!--                        <skipFormModel>false</skipFormModel>-->
+<!--                    </globalProperties>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <generatorName>spring</generatorName>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/library-api.yaml</inputSpec>-->
+<!--                            <output>${project.build.directory}/generated-sources</output>-->
+<!--                            <generateSupportingFiles>false</generateSupportingFiles>-->
+<!--                            <apiPackage>com.robert.library-service.models</apiPackage>-->
+<!--                            <configOptions>-->
+<!--                                <sourceFolder>src/main/java</sourceFolder>-->
+<!--                                <library>spring-boot</library>-->
+<!--                                <hideGenerationTimestamp>true</hideGenerationTimestamp>-->
+<!--                                <interfaceOnly>true</interfaceOnly>-->
+<!--                                <useTags>true</useTags>-->
+<!--                            </configOptions>-->
+<!--                            <importMappings>&ndash;&gt;-->
+<!--                                <importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>-->
+<!--                            </importMappings>-->
+<!--                            <supportingFilesToGenerate>-->
+<!--                                ApiUtil.java-->
+<!--                            </supportingFilesToGenerate>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
 
-            <!--                        <configuration>-->
-            <!--                            <generatorName>spring</generatorName>-->
-            <!--                            <output>${path.client.server}</output>-->
-            <!--                            <apiPackage>com.tsystems.mapa.api.generated.adapter</apiPackage>-->
-            <!--                            <strictSpec>true</strictSpec>-->
-            <!--                            <configOptions>-->
-            <!--                                <sourceFolder>src/main/java</sourceFolder>-->
-            <!--                                <library>spring-boot</library>-->
-            <!--                                <hideGenerationTimestamp>true</hideGenerationTimestamp>-->
-            <!--                                <interfaceOnly>true</interfaceOnly>-->
-            <!--                                <useTags>true</useTags>-->
-            <!--                            </configOptions>-->
-            <!--                            <importMappings>-->
-            <!--                                <importMapping>Pageable=org.springframework.data.domain.Pageable</importMapping>-->
-            <!--                            </importMappings>-->
-            <!--                            <supportingFilesToGenerate>-->
-            <!--                                ApiUtil.java-->
-            <!--                            </supportingFilesToGenerate>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--
-            <!--                </executions>-->
-            <!--            </plugin>-->
-
-
+<!--            </plugin>-->
         </plugins>
     </build>
 
