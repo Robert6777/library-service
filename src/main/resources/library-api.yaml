@@ -1,0 +1,41 @@
+openapi: 3.0.0
+
+info:
+  version: 0.0.1
+  title: Library Service
+  description: This is my Library Service
+
+tags:
+  - name: "Library"
+
+paths:
+
+  /library/products:
+    get:
+      summary: This is a summary
+      tags:
+        - "Library"
+      description: "This is a description"
+      operationId: getAllProducts
+      responses:
+        "200":
+          description: 200 means its OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductListDTO'
+
+components:
+  schemas:
+    ProductListDTO:
+      description: THIS IS A PRODUCT LIST DTO
+      type: object
+      properties:
+        name:
+          description: name of the product
+          type: string
+        year:
+          description: this is a year of manufacturing
+          type: string
